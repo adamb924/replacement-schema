@@ -4,6 +4,7 @@
 #include <QFont>
 #include <QBrush>
 #include <QMimeData>
+#include <QFile>
 
 #include "replacementschema.h"
 #include "replacementpass.h"
