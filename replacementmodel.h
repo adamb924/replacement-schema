@@ -8,7 +8,9 @@ class ReplacementSchema;
 class ReplacementPass;
 class ReplacementGroup;
 
-class ReplacementModel : public QAbstractItemModel
+#include "replacement-schema_global.h"
+
+class REPLACEMENTSCHEMA_EXPORT ReplacementModel : public QAbstractItemModel
 {
     Q_OBJECT
 

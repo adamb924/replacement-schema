@@ -6,7 +6,9 @@
 
 #include "replacementgroup.h"
 
-class ReplacementPass
+#include "replacement-schema_global.h"
+
+class REPLACEMENTSCHEMA_EXPORT ReplacementPass
 {
 public:
     ReplacementPass();

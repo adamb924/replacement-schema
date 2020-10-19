@@ -3,7 +3,9 @@
 
 #include "replacement.h"
 
-class ReplacementGroup
+#include "replacement-schema_global.h"
+
+class REPLACEMENTSCHEMA_EXPORT ReplacementGroup
 {
 public:
     ReplacementGroup();

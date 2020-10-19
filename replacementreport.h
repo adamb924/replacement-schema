@@ -6,7 +6,9 @@
 
 class Replacement;
 
-class ReplacementEvent {
+#include "replacement-schema_global.h"
+
+class REPLACEMENTSCHEMA_EXPORT ReplacementEvent {
 public:
     ReplacementEvent(const QString & passName, const Replacement * replacement, const QString & result );
 
@@ -22,7 +24,7 @@ private:
     QString mResult;
 };
 
-class ReplacementReport
+class REPLACEMENTSCHEMA_EXPORT ReplacementReport
 {
 public:
     ReplacementReport();

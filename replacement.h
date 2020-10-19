@@ -5,7 +5,9 @@
 #include <QList>
 #include <QXmlStreamWriter>
 
-class Replacement
+#include "replacement-schema_global.h"
+
+class REPLACEMENTSCHEMA_EXPORT Replacement
 {
 public:
     Replacement();

@@ -5,7 +5,9 @@
 
 class ReplacementReport;
 
-class ReplacementReportModel : public QAbstractTableModel
+#include "replacement-schema_global.h"
+
+class REPLACEMENTSCHEMA_EXPORT ReplacementReportModel : public QAbstractTableModel
 {
     Q_OBJECT
 
