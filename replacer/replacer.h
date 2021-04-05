@@ -28,7 +28,7 @@ private:
     Mode mMode;
     ReplacementSchema mSchema;
     bool mIsOk;
-    QHash<QString, QHash<QString,QString > > mElements;
+    QMultiHash<QString, QHash<QString,QString > > mElements;
 };
 
 #endif // REPLACER_H
