@@ -19,17 +19,18 @@ Replacer::Replacer(const QString &schemaFile) : mIsOk(true)
 void Replacer::performReplacement(const QString &inputPath, const QString &outputPath) const
 {
     QFile inFile(inputPath);
+
     if( ! inFile.open( QFile::ReadOnly )  )
     {
-        qCritical() << "Cannot open input path:" << inputPath;
-        return;
+        const QString message = "Cannot open input path: " + inputPath;
+        throw std::runtime_error( message.toStdString() );
     }
 
     QFile outFile(outputPath);
     if( ! outFile.open( QFile::WriteOnly )  )
     {
-        qCritical() << "Cannot open output path:" << outputPath;
-        return;
+        const QString message = "Cannot open output path: " + outputPath;
+        throw std::runtime_error( message.toStdString() );
     }
 
     if( mMode == Replacer::Text )
@@ -45,6 +46,13 @@ void Replacer::performReplacement(const QString &inputPath, const QString &outpu
 void Replacer::readSchemaFile(const QString &schemaFile)
 {
     QFile file(schemaFile);
+
+    if( !file.exists() )
+    {
+        const QString message = "Schema file doesn't exist: " + schemaFile;
+        throw std::runtime_error( message.toStdString() );
+    }
+
     if( file.open( QFile::ReadOnly ) )
     {
         QXmlStreamReader in(&file);
