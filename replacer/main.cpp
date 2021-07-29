@@ -29,6 +29,9 @@ int main(int argc, char *argv[])
     const QString input = args.at(1);
     const QString output = args.at(2);
 
+    /// TODO for text files, it's stupid to make a schema file
+    /// also, <schema> should be called <settings> or something like tthat
+
     Replacer replacer(schema);
     if( replacer.isOk() )
     {
