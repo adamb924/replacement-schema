@@ -33,7 +33,9 @@ HEADERS += \
     replacementreportmodel.h \
     replacementschema.h
 
+
 # Default rules for deployment.
+win32:target.path = $$[QT_INSTALL_LIBS]
 unix {
     target.path = /usr/lib
 }
