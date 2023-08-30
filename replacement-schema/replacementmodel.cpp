@@ -69,9 +69,7 @@ QModelIndex ReplacementModel::parent(const QModelIndex &index) const
     switch( mSchema->getLevelFromPointer(index.internalPointer()) )
     {
     case ReplacementSchema::PassObject:
-        pass = mSchema->passes()->indexOf( static_cast<ReplacementPass*>(index.internalPointer()) );
         return QModelIndex(); // because Pass object have the top-level as a parent
-//        return createIndex( index.row(), 0, mSchema->passes()->at(pass) );
     case ReplacementSchema::GroupObject:
         g = static_cast<ReplacementGroup*>(index.internalPointer());
         pass = mSchema->passFromReplacementGroup( g );

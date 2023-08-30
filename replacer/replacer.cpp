@@ -6,7 +6,7 @@
 
 #include <stdexcept>
 
-Replacer::Replacer(const QString &schemaFile) : mIsOk(true)
+Replacer::Replacer(const QString &schemaFile) : mMode(Replacer::Text), mIsOk(true)
 {
     try {
         mSchema.readReplacements(schemaFile);

@@ -17,7 +17,7 @@ class REPLACEMENTSCHEMA_EXPORT ReplacementModel : public QAbstractItemModel
 public:
     enum Roles { Enabled = Qt::UserRole + 1};
 
-    ReplacementModel(ReplacementSchema * schema, QObject *parent = nullptr);
+    explicit ReplacementModel(ReplacementSchema * schema, QObject *parent = nullptr);
 
     // Header:
     QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;

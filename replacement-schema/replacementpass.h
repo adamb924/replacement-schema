@@ -12,7 +12,7 @@ class REPLACEMENTSCHEMA_EXPORT ReplacementPass
 {
 public:
     ReplacementPass();
-    ReplacementPass(const QString & name);
+    explicit ReplacementPass(const QString & name);
     ~ReplacementPass();
 
     QString name() const;

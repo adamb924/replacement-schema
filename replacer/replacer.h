@@ -11,7 +11,7 @@ class Replacer
 public:
     enum Mode { Text, Xml };
 
-    Replacer(const QString & schemaFile);
+    explicit Replacer(const QString & schemaFile);
 
     void performReplacement(const QString & inputPath, const QString & outputPath) const;
 
