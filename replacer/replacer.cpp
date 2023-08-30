@@ -69,37 +69,20 @@ void Replacer::performReplacementXml(QFile &inFile, QFile &outFile) const
     while(!in.atEnd())
     {
         in.readNext();
-        if( in.isStartElement() && matchesElement(in) )
+        if( in.isCharacters() )
         {
-            out.writeCurrentToken( in ); /// the start element
-            const QString elementText = in.readElementText();
-            out.writeCharacters( mSchema.performReplacements(elementText) );
-            out.writeCurrentToken( in ); /// the end element
+            out.writeCharacters( mSchema.performReplacements( in.text().toString() ) );
         }
         else
         {
-            out.writeCurrentToken( in );
+            out.writeCurrentToken(in);
         }
     }
 }
 
-bool Replacer::matchesElement(QXmlStreamReader &in) const
+void Replacer::setMode(Mode newMode)
 {
-    const QString elementName = in.name().toString();
-    if( mElements.contains( elementName ) )
-    {
-        QHashIterator<QString,QString> i( mElements.value(elementName) );
-        while( i.hasNext() )
-        {
-            i.next();
-            if( ! in.attributes().hasAttribute( i.key() ) || in.attributes().value( i.key() ).toString() != i.value() )
-            {
-                return false;
-            }
-        }
-        return true;
-    }
-    return false;
+    mMode = newMode;
 }
 
 const ReplacementSchema *Replacer::schema() const

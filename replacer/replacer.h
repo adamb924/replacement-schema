@@ -19,16 +19,15 @@ public:
 
     const ReplacementSchema *schema() const;
 
+    void setMode(Mode newMode);
+
 private:
     void performReplacementText(QFile &inFile, QFile &outFile) const;
     void performReplacementXml(QFile &inFile, QFile &outFile) const;
 
-    bool matchesElement(QXmlStreamReader & in) const;
-
     Mode mMode;
     ReplacementSchema mSchema;
     bool mIsOk;
-    QMultiHash<QString, QHash<QString,QString > > mElements;
 };
 
 #endif // REPLACER_H

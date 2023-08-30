@@ -18,6 +18,8 @@ int main(int argc, char *argv[])
     parser.addPositionalArgument("schema", QCoreApplication::translate("main", "Schema file."));
     parser.addPositionalArgument("input", QCoreApplication::translate("main", "Input file."));
     parser.addPositionalArgument("output", QCoreApplication::translate("main", "Output file."));
+    QCommandLineOption xmlOption(QStringList() << "x" << "xml" << "Process file as XML instead of as plain text.");
+    parser.addOption( xmlOption );
 
     parser.process(a);
 
@@ -29,11 +31,14 @@ int main(int argc, char *argv[])
     const QString schema = args.at(0);
     const QString input = args.at(1);
     const QString output = args.at(2);
+    const bool xml = parser.isSet(xmlOption);
 
     /// TODO for text files, it's stupid to make a schema file
     /// also, <schema> should be called <settings> or something like tthat
 
     Replacer replacer(schema);
+    replacer.setMode( xml ? Replacer::Xml : Replacer::Text );
+
     qInfo() << replacer.schema()->summary();
     if( replacer.isOk() )
     {
