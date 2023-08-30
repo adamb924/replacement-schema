@@ -39,6 +39,8 @@ public:
 
     ReplacementSchema::Level getLevelFromPointer(void *p) const;
 
+    QString summary() const;
+
 private:
     QList<ReplacementPass*> mPasses;
     bool mChanged;

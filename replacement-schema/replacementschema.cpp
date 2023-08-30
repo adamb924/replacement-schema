@@ -240,3 +240,14 @@ ReplacementSchema::Level ReplacementSchema::getLevelFromPointer(void *p) const
     }
     return ReplacementSchema::NoObject;
 }
+
+QString ReplacementSchema::summary() const
+{
+    int groups = 0, replacements = 0;
+    for(int i=0; i<mPasses.count(); i++)
+    {
+        groups += mPasses.at(i)->groupCount();
+        replacements += mPasses.at(i)->replacementCount();
+    }
+    return QString("%1 pass(es), %2 group(s), %3 replacement(s)").arg( mPasses.count() ).arg( groups ).arg( replacements );
+}

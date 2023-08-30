@@ -18,6 +18,8 @@ public:
 
     int indexFromReplacement( const Replacement * replacement );
 
+    int count() const;
+
 private:
     QList<Replacement*> mReplacements;
 };

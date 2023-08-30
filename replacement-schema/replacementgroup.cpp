@@ -44,3 +44,8 @@ int ReplacementGroup::indexFromReplacement(const Replacement *replacement)
     }
     return -1;
 }
+
+int ReplacementGroup::count() const
+{
+    return mReplacements.count();
+}

@@ -1,6 +1,7 @@
 #include <QCoreApplication>
 
 #include <QCommandLineParser>
+#include <QtDebug>
 
 #include "replacer.h"
 
@@ -33,9 +34,15 @@ int main(int argc, char *argv[])
     /// also, <schema> should be called <settings> or something like tthat
 
     Replacer replacer(schema);
+    qInfo() << replacer.schema()->summary();
     if( replacer.isOk() )
     {
         replacer.performReplacement( input, output );
+        qInfo() << "Transformed" << input << "to" << output << "using" << schema;
+    }
+    else
+    {
+        qCritical() << "Replacer is not okay.";
     }
 
     return 0;

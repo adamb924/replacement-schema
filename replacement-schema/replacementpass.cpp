@@ -53,3 +53,18 @@ QList<ReplacementGroup *> *ReplacementPass::replacementGroups()
     return &mReplacementGroups;
 }
 
+int ReplacementPass::groupCount() const
+{
+    return mReplacementGroups.count();
+}
+
+int ReplacementPass::replacementCount() const
+{
+    int ct = 0;
+    for(int i=0; i<mReplacementGroups.count(); i++)
+    {
+        ct += mReplacementGroups.at(i)->count();
+    }
+    return ct;
+}
+

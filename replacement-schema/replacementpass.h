@@ -24,6 +24,9 @@ public:
 
     QList<ReplacementGroup *> *replacementGroups();
 
+    int groupCount() const;
+    int replacementCount() const;
+
 private:
     QString mName;
     QList<ReplacementGroup*> mReplacementGroups;
