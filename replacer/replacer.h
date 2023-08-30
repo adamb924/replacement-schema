@@ -17,9 +17,9 @@ public:
 
     bool isOk() const;
 
-private:
-    void readSchemaFile(const QString & schemaFile);
+    const ReplacementSchema *schema() const;
 
+private:
     void performReplacementText(QFile &inFile, QFile &outFile) const;
     void performReplacementXml(QFile &inFile, QFile &outFile) const;
 

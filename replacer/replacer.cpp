@@ -9,7 +9,7 @@
 Replacer::Replacer(const QString &schemaFile) : mIsOk(true)
 {
     try {
-        readSchemaFile(schemaFile);
+        mSchema.readReplacements(schemaFile);
     }  catch (const std::runtime_error& e) {
         mIsOk = false;
         qCritical() << e.what() << "(" << schemaFile << ")";
@@ -40,69 +40,6 @@ void Replacer::performReplacement(const QString &inputPath, const QString &outpu
     else if( mMode == Replacer::Xml )
     {
         performReplacementXml(inFile, outFile);
-    }
-}
-
-void Replacer::readSchemaFile(const QString &schemaFile)
-{
-    QFile file(schemaFile);
-
-    if( !file.exists() )
-    {
-        const QString message = "Schema file doesn't exist: " + schemaFile;
-        throw std::runtime_error( message.toStdString() );
-    }
-
-    if( file.open( QFile::ReadOnly ) )
-    {
-        QXmlStreamReader in(&file);
-
-        in.readNextStartElement();
-        if( in.name() != "schema" )
-        {
-            throw std::runtime_error( "Expected 'models' as a root element" );
-        }
-        if( in.attributes().value("mode") == "xml" )
-        {
-            mMode = Replacer::Xml;
-        }
-        else
-        {
-            mMode = Replacer::Text;
-        }
-
-        while(!in.atEnd())
-        {
-            in.readNext();
-
-            if( in.isStartElement() )
-            {
-                QString name = in.name().toString();
-                QXmlStreamAttributes attr = in.attributes();
-
-                if ( name == "replacements" )
-                {
-                    mSchema.readReplacements( in.readElementText() );
-                }
-                else if ( name == "element" )
-                {
-                    const QString elementName = in.attributes().value("name").toString();
-                    QHash<QString,QString> attributes;
-                    while( ! ( name == "element" && in.isEndElement() ) )
-                    {
-                        /// read any attributes
-                        in.readNext();
-                        if( in.isStartElement() && in.name() == "attribute" )
-                        {
-                            const QString attr = in.attributes().value("name").toString();
-                            const QString value = in.readElementText();
-                            attributes.insert( attr, value );
-                        }
-                    }
-                    mElements.insert( elementName, attributes );
-                }
-            }
-        }
     }
 }
 
@@ -163,6 +100,11 @@ bool Replacer::matchesElement(QXmlStreamReader &in) const
         return true;
     }
     return false;
+}
+
+const ReplacementSchema *Replacer::schema() const
+{
+    return &mSchema;
 }
 
 bool Replacer::isOk() const
