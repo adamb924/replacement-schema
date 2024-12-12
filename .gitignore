@@ -1,3 +1,5 @@
 
 replacement-schema.pro.user
 replacement-schema-cppcheck-build-dir/**
+/build
+*.user
