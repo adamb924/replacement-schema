@@ -545,11 +545,11 @@ void ReplacementModel::importReplacements(int toPass, const QString &filename)
             QStringList fields = line.split("\t");
             if( fields.count() == 3 )
             {
-                replacements << new Replacement( QRegularExpression(fields.at(0)), fields.at(1), fields.at(2) );
+                replacements << new Replacement( QRegularExpression(fields.at(0), QRegularExpression::UseUnicodePropertiesOption), fields.at(1), fields.at(2) );
             }
             else if( fields.count() == 2 )
             {
-                replacements << new Replacement( QRegularExpression(fields.at(0)), fields.at(1) );
+                replacements << new Replacement( QRegularExpression(fields.at(0), QRegularExpression::UseUnicodePropertiesOption), fields.at(1) );
             }
             else
             {
@@ -652,7 +652,7 @@ void ReplacementModel::setReplacementData(Replacement *r, const QModelIndex &ind
         switch(index.column())
         {
         case 0:
-            r->setBefore( QRegularExpression(value.toString()) );
+            r->setBefore( QRegularExpression(value.toString(), QRegularExpression::UseUnicodePropertiesOption) );
             break;
         case 1:
             r->setAfter( value.toString() );
